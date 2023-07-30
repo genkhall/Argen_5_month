@@ -16,11 +16,18 @@ class Star(models.Model):
     def __str__(self):
         return str(self.stars)
 class Movie(models.Model):
+    director = models.ForeignKey(Director, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
     duration = models.IntegerField(default=0)
-    director = models.ForeignKey(Director, on_delete=models.CASCADE)
-    # star = models.ForeignKey(Star,on_delete=models.CASCADE)
+
+
+
+
+    def director_str(self):
+        if self.director:
+            return self.director.name
+        return None
 
     def __str__(self):
         return self.title
