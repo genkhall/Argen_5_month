@@ -17,7 +17,7 @@ class DirectorSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = ' text stars'.split()
+        fields = ' text stars movie_id'.split()
 
 
 class MovieSerializerWithReview(serializers.ModelSerializer):
@@ -61,16 +61,16 @@ class ReviewValidateSerializer(serializers.Serializer):
     movie_id = serializers.IntegerField(min_value=1)
     stars_id = serializers.IntegerField(min_value=1, max_value=5)
 
-    def validate_movie_id(self, movie_id):
+    def validate_movie_id(self, id):
         try:
-            Movie.objects.get(id=movie_id)
+            Movie.objects.get(id=id)
         except Movie.DoesNotExist:
             raise ValidationError("No movie:(")
-        return movie_id
+        return id
 
-    def validate_stars_id(self, stars_id):
+    def validate_stars_id(self, id):
         try:
-            Star.objects.get(id=stars_id)
+            Star.objects.get(id=id)
         except Star.DoesNotExist:
             raise ValidationError("No star:(")
-        return stars_id
+        return id

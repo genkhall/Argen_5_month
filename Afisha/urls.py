@@ -20,14 +20,14 @@ from movie_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/directors/', views.directors_list_api_view),
-    path('api/v1/directors/<int:d_id>/', views.detail_director_api_view, name='movie_review_list_api'),
-    path('api/v1/movies/reviews/',views.movie_and_review_list_api_view),
-    path('api/v1/movies/reviews/<int:movie_id>/', views.movie_review_detail_api_view),
-    path('api/v1/movies/',views.movie_list_api_view),
-    path('api/v1/movies/<int:movie_id>/', views.movie_detail_api_view),
-    path('api/v1/reviews/',views.review_list_api_view),
-    path('api/v1/reviews/<int:review_id>/', views.review_detail_api_view),
+    path('api/v1/directors/', views.DirectorsAPIView.as_view()),
+    path('api/v1/directors/<int:id>/', views.DirectorDetailAPIView.as_view(), name='movie_review_list_api'),
+    path('api/v1/movies/reviews/',views.MovieReviewAPIView.as_view()),
+    # path('api/v1/movies/reviews/<int:movie_id>/', views.movie_review_detail_api_view),
+    path('api/v1/movies/',views.MovieListAPIView.as_view()),
+    path('api/v1/movies/<int:id>/', views.MovieDetailAPIView.as_view()),
+    path('api/v1/reviews/',views.ReviewListAPIView.as_view()),
+    path('api/v1/reviews/<int:id>/', views.ReviewDetailAPIView.as_view()),
     path('api/v1/users/', include('users.urls'))
 
 ]
